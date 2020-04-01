@@ -1,12 +1,12 @@
 import React from 'react';
-import ApiCovid from './utils/apiCovid'
+import Map from './components/Map'
 
 
 function App() {
 
   return (
     <>
-      <p>Hello</p>
+      <Map />
     </>
   );
 }
