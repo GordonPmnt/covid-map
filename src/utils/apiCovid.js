@@ -5,16 +5,19 @@ const apiCovid = {
     dataType: ".json",
 
     get() {
-        axios({
-            "method": "GET",
-            "url": `${this.url}${this.dataType}`,
-        })
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+        return (
+            axios({
+                "method": "GET",
+                "url": `${this.url}${this.dataType}`,
+            })
+            .then(response => {
+                response.id = 1;
+                return response
+            })
+            .catch((error) => {
+                console.log(error.response)
+            })
+        )
     }
 }
 
