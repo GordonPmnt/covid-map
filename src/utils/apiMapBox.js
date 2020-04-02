@@ -6,24 +6,26 @@ const apiMapBox = {
     searchType: "mapbox.places/",
     dataType: ".json",
 
-    getLocation(place) {
-        axios({
-            "method": "GET",
-            "url": `${this.url}${this.searchType}${place}${this.dataType}`,
-            "params": {
-                "access_token": settings.mapBoxToken,
-                "autocomplete": "false",
-                "types": "country",
-                "limit": 1,
-            },
-        })
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    },
+    getCountryCoordinates(place) {
+        return (
+            axios({
+                "method": "GET",
+                "url": `${this.url}${this.searchType}${place}${this.dataType}`,
+                "params": {
+                    "access_token": settings.mapBoxToken,
+                    "autocomplete": "false",
+                    "types": "country",
+                    "limit": 1,
+                },
+            })
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error.response)
+            })
+        )
+    }
 }
 
 export default apiMapBox;
