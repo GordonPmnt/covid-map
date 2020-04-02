@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-class ApiCovid {
+const apiCovid = {
+    url: "https://pomber.github.io/covid19/timeseries",
+    dataType: ".json",
 
-    static get() {
+    get() {
         axios({
             "method": "GET",
-            "url": "https://pomber.github.io/covid19/timeseries.json",
+            "url": `${this.url}${this.dataType}`,
         })
         .then((response) => {
             console.log(response)
@@ -16,4 +18,4 @@ class ApiCovid {
     }
 }
 
-export default ApiCovid;
+export default apiCovid;
