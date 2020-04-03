@@ -13,26 +13,24 @@ const dataGenerator = () => {
 
 const extendsJson = resCovid => {
     let data = resCovid.data;
-    resCovid.data = {}
+    resCovid.data = {
+        type: 'FeatureCollection',
+        features: [],
+    }
     
     for(let country in data) {
         apiMapBox.getCountryCoordinates(country)            
         .then(
             resMapbox => {
-                return (
-                    {
-                        type: 'FeatureCollection',
-                        features: [{
-                            country: resCovid.data[country],
-                            statistics: data[country],
-                            type: 'Feature',
-                            geometry: {
-                                type: 'Point', 
-                                coordinates: resMapbox.data.features[0].center,
-                            },
-                        }],
-                    }
-                )
+                resCovid.data.features.push({
+                    country: country,
+                    statistics: data[country],
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',                                 
+                        coordinates: resMapbox.data.features[0].center,
+                    },
+                })
             }
         )
         .catch(err => console.log(`${country} doesn't exists in MapBox.`))    
