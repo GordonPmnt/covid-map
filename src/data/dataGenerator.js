@@ -1,14 +1,10 @@
 import apiCovid from '../utils/apiCovid';
 import apiMapBox from '../utils/apiMapBox';
 
-const dataGenerator = () => {
-    apiCovid.get()
-    .then(
-        resCovid => {
-            return extendsJson(resCovid);
-        }
-    )
-    .catch(err => console.log(err))
+const dataGenerator = async () => {
+    const resCovid = await apiCovid.get()
+    const response = await extendsJson(resCovid)
+    return response
 }
 
 const extendsJson = resCovid => {
@@ -23,7 +19,7 @@ const extendsJson = resCovid => {
         .then(
             resMapbox => {
                 resCovid.data.features.push({
-                    country: country,
+                    country,
                     statistics: data[country],
                     type: 'Feature',
                     geometry: {
