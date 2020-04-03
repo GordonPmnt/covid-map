@@ -3,7 +3,7 @@ import ReactMapGL, { Source, Layer } from 'react-map-gl';
 import settings from '../settings'
 
 
-const Map = () => {
+const Map = ({ data }) => {
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -11,8 +11,6 @@ const Map = () => {
     longitude: 5,
     zoom: 3
   });
-
-  const data = require('../data/datatest.json')
 
   return (
     <>

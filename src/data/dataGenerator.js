@@ -5,8 +5,7 @@ const dataGenerator = () => {
     apiCovid.get()
     .then(
         resCovid => {
-            let response = extendsJson(resCovid);
-            console.log(response);
+            return extendsJson(resCovid);
         }
     )
     .catch(err => console.log(err))
