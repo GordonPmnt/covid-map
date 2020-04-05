@@ -8,19 +8,28 @@ class App extends Component {
     super();
     this.state = { 
       data: {},
+      isFetching: true,
     };
   }
 
-  async componentDidMount() {
-    const { data } = await dataGenerator()
-    this.setState({ data })
+  componentDidMount() {
+    this.setState({ 
+      ...this.state, 
+      isFetching: true, 
+    });
+    dataGenerator().then(
+      response => this.setState({ 
+        data: response.data, 
+        isFetching: false, 
+      })
+    )
   }
 
   render() {
 
     return (
       <>
-        <Map data={this.state.data} />
+        <Map {...this.state} />
       </>
     );
   }

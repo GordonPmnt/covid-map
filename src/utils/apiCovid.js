@@ -11,7 +11,6 @@ const apiCovid = {
                 "url": `${this.url}${this.dataType}`,
             })
             .then(response => {
-                response.id = 1;
                 return response
             })
             .catch((error) => {

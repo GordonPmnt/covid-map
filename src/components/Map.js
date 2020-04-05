@@ -3,7 +3,7 @@ import ReactMapGL, { Source, Layer } from 'react-map-gl';
 import settings from '../settings'
 
 
-const Map = ({ data }) => {
+const Map = ({ data, isFetching }) => {
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -22,7 +22,7 @@ const Map = ({ data }) => {
         <Source
           id="covidData"
           type="geojson"
-          data={data}
+          data={!isFetching && data}
         >
           <Layer
             id="point"
