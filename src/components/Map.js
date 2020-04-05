@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import settings from '../settings'
+import Circles from './Circles'
 
 
 const Map = ({ data, isFetching }) => {
@@ -19,20 +20,10 @@ const Map = ({ data, isFetching }) => {
         onViewportChange={setViewport}
         mapboxApiAccessToken={settings.mapBoxToken}
       >
-        <Source
-          id="covidData"
-          type="geojson"
-          data={!isFetching && data}
-        >
-          <Layer
-            id="point"
-            type="circle"
-            paint={{
-              'circle-radius': 5,
-              'circle-color': 'red'
-              }} 
-          />
-        </Source>
+        <Circles 
+          data={data} 
+          isFetching={isFetching} 
+        />
       </ReactMapGL>
     </>
   );
