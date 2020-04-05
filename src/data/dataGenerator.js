@@ -2,12 +2,13 @@ import apiCovid from '../utils/apiCovid';
 import apiMapBox from '../utils/apiMapBox';
 
 const dataGenerator = async () => {
-    const resCovid = await apiCovid.get()
-    const response = await extendsJson(resCovid)
+    const response = await apiCovid.get().then(
+        resCovid => extendsJson(resCovid)
+    )
     return response
 }
 
-const extendsJson = resCovid => {
+const extendsJson = async resCovid => {
     let data = resCovid.data;
     resCovid.data = {
         type: "FeatureCollection",
@@ -15,11 +16,10 @@ const extendsJson = resCovid => {
     }
     
     for(let country in data) {
-        apiMapBox.getCountryCoordinates(country)            
+        await apiMapBox.getCountryCoordinates(country)            
         .then(
             resMapbox => {
                 resCovid.data.features.push({
-                    statistics: data[country],
                     type: "Feature",
                     geometry: {
                         type: "Point",                                 
@@ -27,6 +27,7 @@ const extendsJson = resCovid => {
                     },
                     properties : {
                         country,
+                        statistics: data[country],
                     },
                 })
             }
