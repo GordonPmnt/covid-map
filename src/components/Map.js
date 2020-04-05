@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import settings from '../settings'
 import Circles from './Circles'
+import { filtersDataByDate } from '../utils/dates'
 
 
 const Map = ({ data, isFetching }) => {
@@ -22,7 +23,7 @@ const Map = ({ data, isFetching }) => {
         mapStyle="mapbox://styles/mapbox/dark-v9"
       >
         <Circles 
-          data={data} 
+          data={!isFetching && filtersDataByDate(data)} 
           isFetching={isFetching} 
         />
       </ReactMapGL>
