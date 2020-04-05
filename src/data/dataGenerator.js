@@ -10,7 +10,7 @@ const dataGenerator = async () => {
 const extendsJson = resCovid => {
     let data = resCovid.data;
     resCovid.data = {
-        type: 'FeatureCollection',
+        type: "FeatureCollection",
         features: [],
     }
     
@@ -19,12 +19,14 @@ const extendsJson = resCovid => {
         .then(
             resMapbox => {
                 resCovid.data.features.push({
-                    country,
                     statistics: data[country],
-                    type: 'Feature',
+                    type: "Feature",
                     geometry: {
-                        type: 'Point',                                 
+                        type: "Point",                                 
                         coordinates: resMapbox.data.features[0].center,
+                    },
+                    properties : {
+                        country,
                     },
                 })
             }
