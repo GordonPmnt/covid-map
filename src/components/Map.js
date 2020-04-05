@@ -19,6 +19,7 @@ const Map = ({ data, isFetching }) => {
         {...viewport}
         onViewportChange={setViewport}
         mapboxApiAccessToken={settings.mapBoxToken}
+        mapStyle="mapbox://styles/mapbox/dark-v9"
       >
         <Circles 
           data={data} 
